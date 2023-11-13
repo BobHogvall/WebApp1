@@ -1,0 +1,294 @@
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:300,600");
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Work Sans", sans-serif;
+  margin: 0;
+  background-color: #292928;
+
+  overflow-x: hidden;
+}
+
+/* site-header*/
+.flex {
+  display: flex;
+  gap: 2rem;
+}
+
+.site-header {
+  grid-area: site-header;
+  background-color: black;
+  color: #c4c4be;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 400%;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.1cm;
+  margin-top: 2rem; /*moves title up*/
+  margin-left: 3rem;
+}
+
+.mobile-nav-toggle {
+  display: none;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  margin-right: 6rem;
+}
+
+nav a {
+  color: #c4c4be;
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+nav a:hover {
+  color: #ffffff;
+}
+
+nav a {
+  opacity: 1;
+  position: relative;
+}
+
+nav a::before {
+  content: "";
+  display: block;
+  height: 5px;
+  background: white;
+  position: absolute;
+  top: -0.75em;
+  left: 0;
+  right: 0;
+  transform: scale(0, 1);
+  transition: transform ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  transform: scale(1, 1);
+}
+
+@keyframes pulsate {
+  100% {
+    text-shadow: 0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffff,
+      0 0 40px #ddd8db, 0 0 80px #edeced, 0 0 90px #edeced, 0 0 100px #edeced,
+      0 0 150px #edeced;
+  }
+
+  0% {
+    text-shadow: 0 0 2px #ffffff, 0 0 4px #ffffff, 0 0 6px #ffffff,
+      0 0 10px #edeced, 0 0 45px #edeced, 0 0 55px #edeced, 0 0 70px #edeced,
+      0 0 80px #edeced;
+  }
+}
+
+.pulsate {
+  animation: pulsate 1.5s infinite alternate;
+}
+
+.about-section {
+  margin: 1em;
+  color: #edeced;
+}
+
+.about ul {
+    color: #ddd8db;
+    list-style: none;
+}
+
+.site-footer {
+  grid-area: site-footer;
+  background-color: black;
+  color: #c4c4be;
+}
+
+footer a {
+  color: #c4c4be;
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+footer p {
+  margin-left: 1em;
+}
+
+.testimonial-grid {
+  min-height: 100%;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-areas:
+    "site-header"
+    "about-info"
+    "site-footer";
+}
+
+.testimonial:nth-child(1) {
+  grid-area: site-header;
+}
+
+.testimonial:nth-child(2) {
+  grid-area: about-info;
+}
+
+.testimonial:nth-child(3) {
+  grid-area: site-footer;
+}
+
+/* media */
+@media (min-width: 1600px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "site-header site-header site-header site-header"
+      "about-info about-info about-info about-info"
+      "site-footer site-footer site-footer site-footer";
+  }
+
+  .small-header {
+    display: none;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1600px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "site-header site-header site-header site-header"
+      "about-info about-info about-info about-info"
+      "site-footer site-footer site-footer site-footer";
+  }
+
+  .large-header {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 1025px) {
+  .testimonial-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "site-header site-header"
+      "about-info about-info"
+      "site-footer site-footer";
+  }
+
+  .large-header {
+    display: none;
+  }
+
+  .primary-navigation {
+    position: fixed;
+    z-index: 1000;
+    margin-top: 0;
+    inset: 0 0 0 40%;
+    padding: min(30vh, 10rem) 2em;
+    flex-direction: column;
+    background: hsl(0 0% 0% / 0.9);
+    transform: translateX(100%);
+    transition: transform 250ms ease-out;
+  }
+
+  @supports (backdrop-filter: blur(2rem)) {
+    .primary-navigation {
+      background: hsl(0 0% 0% / 0.8);
+      backdrop-filter: blur(2rem);
+    }
+  }
+
+  .primary-navigation[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    background-color: transparent;
+    background-image: url("/artisthemsida/img/icon-hamburger.svg");
+    background-repeat: no-repeat;
+    width: 2rem;
+    border: 0;
+    aspect-ratio: 1 / 1;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] {
+    background-image: url("/artisthemsida/img/icon-close.svg");
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .testimonial-grid {
+    min-height: 100%;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "site-header"
+      "about-info"
+      "site-footer";
+  }
+
+  .large-header {
+    display: none;
+  }
+
+  .primary-navigation {
+    position: fixed;
+    z-index: 1000;
+    margin-top: 0;
+    inset: 0 0 0 40%;
+    padding: min(30vh, 10rem) 2em;
+    flex-direction: column;
+    background: hsl(0 0% 0% / 0.9);
+    transform: translateX(100%);
+    transition: transform 250ms ease-out;
+  }
+
+  @supports (backdrop-filter: blur(2rem)) {
+    .primary-navigation {
+      background: hsl(0 0% 0% / 0.8);
+      backdrop-filter: blur(2rem);
+    }
+  }
+
+  .primary-navigation[data-visible="true"] {
+    transform: translateX(0%);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    background-color: transparent;
+    background-image: url("/artisthemsida/img/icon-hamburger.svg");
+    background-repeat: no-repeat;
+    width: 2rem;
+    border: 0;
+    aspect-ratio: 1 / 1;
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] {
+    background-image: url("/artisthemsida/img/icon-close.svg");
+  }
+}
